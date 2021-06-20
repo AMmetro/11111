@@ -1,8 +1,8 @@
 {
-  "name": "cards-nya",
+  "name": "Currency-exchange",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AMmetro.github.io/cards-nya",
+  "homepage": "https://AMmetro.github.io/Currency-exchange",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
