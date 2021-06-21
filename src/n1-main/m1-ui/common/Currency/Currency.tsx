@@ -28,14 +28,15 @@ function Currency() {
     const changeCurrencyListDateHandler = ()=>{
         //@ts-ignore
         let inputDate=document.getElementById("currencyListDate").value
-        setCurrencyListDate(inputDate)
+        setCurrencyListDate(inputDate)       
     }
 
     const getCurrencyRate=()=>{
+//    --------------------------------------------------------
+
         dispatch(makeCurrencyListTC(currencyListDate))
     }
-    console.log(date)
-    return (
+     return (
         <div className={style.body_container}>
 
 
@@ -58,8 +59,8 @@ function Currency() {
 
             </div>
 
-            {/*<span> {currencyList.date ? currencyList.date : today.getDate() +"-"+ (today.getMonth()+1) +"-"+ today.getFullYear()} </span>*/}
-            <span> {currencyList.date ? currencyList.date.toLocaleDateString() : date}  </span>
+            <span> {currencyList.date ? currencyList.date : today.getDate() +"-"+ (today.getMonth()+1) +"-"+ today.getFullYear()} </span>
+            {/* <span> {currencyList.date ? currencyList.date.toLocaleDateString() : date}  </span> */}
 
             {currPair}
 

@@ -6,14 +6,16 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Start from "../common/Start";
 import Currency from "../common/Currency/Currency";
 import Charts from "../common/Charts/Charts";
+import Exchange from "../common/Exchange/Exchange";
+
 
 
 
 export const PATH = {
     START: "/start",
-    REDUX: "/redux",
+    // REDUX: "/redux",
     LOGIN: "/login",
-    REGISTRATION: "/registration",
+    EXCHANGE: "/exchange",
     CHARTS: "/charts",
     CURRENCY: "/currency"
 }
@@ -27,7 +29,7 @@ function Routes() {
 
             <Route path={PATH.START} render={() => <Start/>}/>
             <Route path={PATH.LOGIN} render={() => <Login/>}/>
-            <Route path={PATH.REGISTRATION} render={() => <Registration/>}/>
+            <Route path={PATH.EXCHANGE} render={() => <Exchange/>}/>
             <Route path={PATH.CHARTS} render={() => <Charts/>}/>
             <Route path={PATH.CURRENCY} render={() => <Currency/>}/>
 

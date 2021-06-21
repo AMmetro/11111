@@ -8,7 +8,7 @@ function Header() {
     <div className="App">
 
         <NavLink to="login">Login</NavLink> &nbsp;
-        <NavLink to="registration">Registration</NavLink> &nbsp;
+        <NavLink to="exchange">exchange</NavLink> &nbsp;
         <NavLink to="charts">Charts</NavLink> &nbsp;
         <NavLink to="Currency">Currency</NavLink> <br/>
 
