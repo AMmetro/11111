@@ -1,0 +1,14 @@
+
+
+.cards_container{
+}
+
+.card_items{
+  margin: 5px;
+  width: 200px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: lightgrey;
+  border: solid 3px blue;
+}
+

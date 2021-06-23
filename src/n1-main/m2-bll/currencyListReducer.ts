@@ -1,7 +1,7 @@
 import {myAPI} from "../m3-dal/Api";
 import {Dispatch} from 'redux'
 
-export type currencyListStateType = {list: any, date:string};
+export type currencyListStateType = {list: Array<any>, date:string};
 const initState:currencyListStateType = {list:[],date:""};
 
 export const currencyListReducer = (state = initState, action: AddCurrencyListType): currencyListStateType => { // fix any

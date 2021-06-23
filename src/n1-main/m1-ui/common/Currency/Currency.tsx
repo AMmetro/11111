@@ -9,14 +9,14 @@ function Currency() {
 
     const [currencyListDate, setCurrencyListDate] = useState<string>("");
 
-    const currencyList=useSelector<AppStoreType,any>(state=>state.currencyListReducer)
+    const currencyList=useSelector<AppStoreType,currencyListStateType>(state=>state.currencyListReducer)
     const dispatch = useDispatch()
 
     const today = new Date();
     today.setDate(today.getDate() );
     const date = today.toISOString().substr(0,10);
 
-      //@ts-ignore
+
       const currPair = currencyList.list.map(elem =>
           <div className={style.pairs_table} id={elem.Cur_Abbreviation}>
               <span>{elem.Cur_Abbreviation}</span>
@@ -28,7 +28,7 @@ function Currency() {
     const changeCurrencyListDateHandler = ()=>{
         //@ts-ignore
         let inputDate=document.getElementById("currencyListDate").value
-        setCurrencyListDate(inputDate)       
+        setCurrencyListDate(inputDate)
     }
 
     const getCurrencyRate=()=>{

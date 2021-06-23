@@ -7,10 +7,12 @@ import thunk from "redux-thunk"
 
 import {currencyListReducer} from "./currencyListReducer";
 import {currencyChartReducer} from "./currencyChartReducer";
+import {walletReducer} from "./currencyWalletReducer";
 
 const rootReducer = combineReducers({
     currencyListReducer: currencyListReducer,
-    currencyChartReducer: currencyChartReducer
+    currencyChartReducer: currencyChartReducer,
+    walletReducer: walletReducer
 });
 
 

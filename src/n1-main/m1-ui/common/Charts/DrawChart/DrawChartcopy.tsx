@@ -11,8 +11,6 @@ const DrawCharts = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const contextRef = React.useRef<CanvasRenderingContext2D | null>(null);
 
-
-
     const draw = (ctx: any, data: any) => {
         let i = 1
         for (i; i < data.length; i++) {

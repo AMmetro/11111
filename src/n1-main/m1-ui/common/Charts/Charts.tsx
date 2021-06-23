@@ -29,11 +29,8 @@ function Charts() {
     //----------------------------------------------------------------------------------
 
 
-
-    //@ts-ignore
     const currencyListName = currencyList.list.map(elem =>
                                     <option key={elem.Cur_Abbreviation}
-                                            data-currency={elem.Cur_Abbreviation}
                                             value={elem.Cur_ID}
                                       >
                                          {elem.Cur_Name}

@@ -1,0 +1,17 @@
+.navigation_container{
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid;
+  justify-content: space-evenly;
+  background: lightslategray;
+}
+
+.navigationLink_holder{
+  background-color: antiquewhite;
+  width: 80px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 2px;
+}
+
