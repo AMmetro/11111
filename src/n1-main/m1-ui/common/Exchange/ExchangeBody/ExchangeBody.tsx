@@ -4,7 +4,7 @@ import SuperButtonContainer from "../../SuperComponents/SuperButton/SuperButtonC
 import {makeCurrencyListTC, currencyListStateType} from "../../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
-import {walletReducerStateType} from "../../../../m2-bll/currencyWalletReducer";
+import {walletReducerStateType} from "../../../../m2-bll/walletReducer";
 import CurrencyCard from "./CurencyCard/CurrencyCard";
 
 
@@ -15,7 +15,7 @@ const ExchangeBody = (props: any) => {
 
     return (
     <div className={style.exchange_body_container} >
-      
+
         { currencyList.list.map(elem =>
              <CurrencyCard
                 id={elem.Cur_Abbreviation}

@@ -1,0 +1,10 @@
+
+.currenciesWallet_wrapper{
+  margin-left: 2px;
+  margin-right: 2px;
+  display: flex;
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+

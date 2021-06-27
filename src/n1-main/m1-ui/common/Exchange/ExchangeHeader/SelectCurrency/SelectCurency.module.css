@@ -1,0 +1,12 @@
+.selectCurency{
+  /*display: flex;*/
+  margin: 0 auto;
+  justify-content: space-around;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 330px;
+}
+
+
+
+
