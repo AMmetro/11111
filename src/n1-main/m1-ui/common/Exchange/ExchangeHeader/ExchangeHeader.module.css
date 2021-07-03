@@ -1,10 +1,24 @@
 .exchange_header{
   display: flex;
+  flex-direction: column;
   width: 99%;
-  margin: 0 auto;
+
   justify-content: space-around;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+@media (min-width: 800px) {
+  .exchange_header {margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+ }
+}
+
+.exchange_header_wallet_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
 }
 
 

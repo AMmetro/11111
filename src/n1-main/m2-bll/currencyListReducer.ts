@@ -5,8 +5,10 @@ export type currencyListStateType = {list: Array<any>, date:string};
 const initState:currencyListStateType = {list:[],date:""};
 
 export const currencyListReducer = (state = initState, action: AddCurrencyListType): currencyListStateType => { // fix any
+
     switch (action.type) {
         case "setCurrencyList": {
+
               return state={list: [...action.currencyList], date:action.currencyListDate};
         }
 

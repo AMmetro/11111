@@ -3,15 +3,24 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import {makeCurrencyListTC, currencyListStateType} from "../../../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../../m2-bll/store";
-import {buyCurrencyTC, sellCurrencyTC} from "../../../../../m2-bll/walletReducer";
-import {buyAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletReducer";
+import {withdrawalMoneyTC, enrolledMoneyTC} from "../../../../../m2-bll/walletReducer";
+import {holderTradeAmountTC} from "../../../../../m2-bll/holderTradeValueReducer";
+import {addAdditionalCurrencyTC, currenciesWalletReducerStateType} from "../../../../../m2-bll/currenciesWalletReducer";
+import {removeAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletReducer";
+import {controlTradeUserinterfaceReducerStateType} from "../../../../../m2-bll/controlTradeUserInterfaceReducer";
 
 
 const SelectCurrency = (props: any) => {
-    const [amount, setAmount] = useState<number>(1000);
+    const [amountTradedCurrency, setAmountTradedCurrency] = useState<any>();
     const currencyList = useSelector<AppStoreType, currencyListStateType>(state => state.currencyListReducer)
     const [currencyId, setCurrencyId] = useState<string>("");
+
+    const controlUserinterface = useSelector<AppStoreType, controlTradeUserinterfaceReducerStateType>(state => state.controlTradeUserInterfaceReducer)
     const dispatch = useDispatch()
+
+    let buttonBuyDisabled = (controlUserinterface.controlTradeBuyUIStatus === "prohibited") ? true : false
+    let buttonSellDisabled = (controlUserinterface.controlTradeSellUIStatus === "prohibited") ? true : false
+
 
     const today = new Date();
     today.setDate(today.getDate());
@@ -26,16 +35,24 @@ const SelectCurrency = (props: any) => {
     }
 
     const buyCurrency = () => {
-        dispatch(buyCurrencyTC(amount, currencyId))
-        dispatch(buyAdditionalCurrencyTC(amount, currencyId))
+        dispatch(withdrawalMoneyTC(amountTradedCurrency, currencyId))
+        dispatch(addAdditionalCurrencyTC(amountTradedCurrency, currencyId))
+        setAmountTradedCurrency(0)
     }
 
     const sellCurrency = () => {
-        dispatch(sellCurrencyTC(amount, currencyId))
+        dispatch(enrolledMoneyTC(amountTradedCurrency, currencyId))
+        dispatch(removeAdditionalCurrencyTC(amountTradedCurrency, currencyId))
+        setAmountTradedCurrency(0)
     }
 
     const enterAmount = (e: ChangeEvent<HTMLInputElement>) => {
-        setAmount(+e.currentTarget.value)
+        setAmountTradedCurrency(+e.currentTarget.value)   // - need??????????????
+
+        //
+        dispatch(holderTradeAmountTC(+e.currentTarget.value, currencyId))
+        //
+
     }
 
     const currencyListName = currencyList.list.map(elem =>
@@ -55,7 +72,7 @@ const SelectCurrency = (props: any) => {
                     <select
                         style={{width: 150}}
                         onChange={selectDropChart}>
-                        <option>валюта не выбрана</option>
+                        <option> - no selected - </option>
                         {currencyListName}
                     </select>
                 </div>
@@ -63,6 +80,7 @@ const SelectCurrency = (props: any) => {
                 <div>
                     Enter amount<br/>
                     <input type="number"
+                           value={amountTradedCurrency}
                            style={{width: 50}}
                            onChange={(e) => enterAmount(e)}
                     />
@@ -70,8 +88,8 @@ const SelectCurrency = (props: any) => {
 
                 <div>
                     press for<br/>
-                    <button onClick={buyCurrency}>Buy</button>
-                    <button onClick={sellCurrency}>Sell</button>
+                    <button onClick={buyCurrency} disabled={buttonBuyDisabled}>Buy</button>
+                    <button onClick={sellCurrency} disabled={buttonSellDisabled}>Sell</button>
                 </div>
 
         </div>

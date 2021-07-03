@@ -1,41 +1,64 @@
-
 import {Dispatch} from 'redux'
 import {changeCurrency} from './utils/exchangeLogic'
 import {AppStoreType} from "./store";
 
-
-
-export type currenciesWalletReducerStateType = {[key: string]: number};
-const initState:currenciesWalletReducerStateType = {};
+export type currenciesWalletReducerStateType = { [key: string]: number };
+const initState: currenciesWalletReducerStateType = {};
 
 
 export const currenciesWalletReducer = (state = initState, action: ChangeWalletBalanceType): currenciesWalletReducerStateType => {
+    console.log("currenciesWallet reducer")
+
+
     switch (action.type) {
-        case "buyAdditionalCurrency": {
+        case "addAdditionalCurrency": {
+            if (state[action.currencyAbreviature]===undefined){
+                state[action.currencyAbreviature]=0
+            }
+            let newCurrencyAmount = state[action.currencyAbreviature]+action.amount
+            return {...state, [action.currencyAbreviature]: newCurrencyAmount}
+        }
 
-            // delete state.USD
-            return {...state, [action.currencyAbreviature]: action.amount}
-             }
+        case "removeAdditionalCurrency": {
 
-        case "sellCurrency": {
-            // let newAmount = state.balance + action.amount
-             return state
-            //
-      }
-        default: return state;
+            let newValueCurrencyAmount = state[action.currencyAbreviature] - action.amount
+            if (newValueCurrencyAmount === 0) {
+                let copyState = {...state}
+                delete copyState[action.currencyAbreviature]
+                return {...copyState }
+            } else {
+                return {...state, [action.currencyAbreviature]: newValueCurrencyAmount}
+            }
+        }
+        default:
+            return state;
     }
 };
 
 // actions-------------------------------------------------------------------
-type ChangeWalletBalanceType = {type: "buyAdditionalCurrency"|"sellCurrency", amount:number, currencyAbreviature:string};
-export const buyAdditionalCurrencyAC = (amount:number, currencyAbreviature:string): ChangeWalletBalanceType => {return {type:"buyAdditionalCurrency", amount, currencyAbreviature}};
-export const sellCurrencyAC = (amount:number,currencyAbreviature:string): ChangeWalletBalanceType => {return {type:"sellCurrency", amount, currencyAbreviature}};
+type ChangeWalletBalanceType = { type: "addAdditionalCurrency" | "removeAdditionalCurrency", amount: number, currencyAbreviature: string };
+export const addAdditionalCurrencyAC = (amount: number, currencyAbreviature: string): ChangeWalletBalanceType => {
+    return {type: "addAdditionalCurrency", amount, currencyAbreviature}
+};
+export const removeAdditionalCurrencyAC = (amount: number, currencyAbreviature: string): ChangeWalletBalanceType => {
+    return {type: "removeAdditionalCurrency", amount, currencyAbreviature}
+};
 
 // thunks-------------------------------------------------------------------
-        export const buyAdditionalCurrencyTC = (amount:number, currencyId:string) => {return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
-            let currencyList = getState().currencyListReducer.list
-             let currencyAbreviature = changeCurrency.getAbreviature(amount, currencyId, currencyList)
-             dispatch(buyAdditionalCurrencyAC(amount, currencyAbreviature))
-      }}
+export const addAdditionalCurrencyTC = (amount: number, currencyId: string) => {
+    return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
+        let currencyList = getState().currencyListReducer.list
+        let currencyAbreviature = changeCurrency.getAbreviature(amount, currencyId, currencyList)
+        dispatch(addAdditionalCurrencyAC(amount, currencyAbreviature))
+    }
+}
+
+export const removeAdditionalCurrencyTC = (amount: number, currencyId: string) => {
+    return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
+        let currencyList = getState().currencyListReducer.list
+        let currencyAbreviature = changeCurrency.getAbreviature(amount, currencyId, currencyList)
+        dispatch(removeAdditionalCurrencyAC(amount, currencyAbreviature))
+    }
+}
 
 

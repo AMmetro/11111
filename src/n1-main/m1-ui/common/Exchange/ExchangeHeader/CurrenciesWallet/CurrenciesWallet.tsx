@@ -13,8 +13,15 @@ const CurrenciesWallet = (props: any) => {
     let headerKeys = Object.keys(additionalCurrency)
     let objValue=Object.values(additionalCurrency);
 
-    const additionalCurrencyHTML=headerKeys.map((headerKeys,i) => {
-        return (<div> <span> {headerKeys} </span> <span> {objValue[i]} </span> </div>)
+    const сurrencyHTML=headerKeys.map((headerKeys,i) => {
+        return (    <div>
+                      <span> {headerKeys} </span>
+                        &nbsp;
+                        <br/>
+                      <span> {objValue[i]} </span>
+                        &nbsp;
+                    </div>
+                )
     })
 
 
@@ -44,7 +51,7 @@ const CurrenciesWallet = (props: any) => {
     return (
        <div className={style.currenciesWallet_wrapper} >
 
-           {additionalCurrencyHTML}
+           {сurrencyHTML}
 
            <svg id="Layer_1" height="51" viewBox="0 0 512 512"
                 width="51" data-name="Layer 1"><path d="m365.29 117.74-298.51 96.96a28.75 28.75 0 0 1 5.98-.62h317.79v-77.98a19.3 19.3 0 0 0 -25.26-18.36z"

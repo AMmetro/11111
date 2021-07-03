@@ -8,16 +8,16 @@ import {walletReducerStateType} from "../../../../../m2-bll/walletReducer";
 const Wallet = (props: any) => {
 
     const wallet = useSelector<AppStoreType, walletReducerStateType>(state => state.walletReducer)
-    const walletBalanca = wallet.BYN
+    const walletBalance = wallet.BYN
 
-    walletBalanca.toFixed(2)
+    walletBalance.toFixed(2)
 
     return (
         <div className={style.wallet_wrapper}>
 
             <div>
                 Balance<br/>
-                {walletBalanca.toFixed(2)}BYN
+                {walletBalance.toFixed(2)}BYN
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48">
