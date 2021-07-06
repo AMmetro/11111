@@ -8,8 +8,6 @@ const initState:walletReducerStateType = {BYN:1000};
 
 export const walletReducer = (state = initState, action: ChangeWalletBalanceType): walletReducerStateType => {
 
-    console.log("wallet reducer")
-
     switch (action.type) {
         case "buyCurrency": {
              let newAmount = state.BYN - action.currencyPrice

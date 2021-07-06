@@ -60,7 +60,6 @@ function Currency() {
             </div>
 
             <span> {currencyList.date ? currencyList.date : today.getDate() +"-"+ (today.getMonth()+1) +"-"+ today.getFullYear()} </span>
-            {/* <span> {currencyList.date ? currencyList.date.toLocaleDateString() : date}  </span> */}
 
             {currPair}
 

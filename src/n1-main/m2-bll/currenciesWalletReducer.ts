@@ -7,8 +7,6 @@ const initState: currenciesWalletReducerStateType = {};
 
 
 export const currenciesWalletReducer = (state = initState, action: ChangeWalletBalanceType): currenciesWalletReducerStateType => {
-    console.log("currenciesWallet reducer")
-
 
     switch (action.type) {
         case "addAdditionalCurrency": {

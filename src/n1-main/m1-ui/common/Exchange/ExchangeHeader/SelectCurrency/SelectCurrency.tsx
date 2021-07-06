@@ -5,13 +5,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../../m2-bll/store";
 import {withdrawalMoneyTC, enrolledMoneyTC} from "../../../../../m2-bll/walletReducer";
 import {holderTradeAmountTC} from "../../../../../m2-bll/holderTradeValueReducer";
-import {addAdditionalCurrencyTC, currenciesWalletReducerStateType} from "../../../../../m2-bll/currenciesWalletReducer";
+import {addAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletReducer";
 import {removeAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletReducer";
-import {controlTradeUserinterfaceReducerStateType} from "../../../../../m2-bll/controlTradeUserInterfaceReducer";
+import {
+    controlTradeBuyUiTC,
+    controlTradeUserinterfaceReducerStateType
+} from "../../../../../m2-bll/controlTradeUserInterfaceReducer";
 
 
 const SelectCurrency = (props: any) => {
     const [amountTradedCurrency, setAmountTradedCurrency] = useState<any>();
+    const [selectedCurrency, setSelectedCurrency] = useState<boolean>(false);
     const currencyList = useSelector<AppStoreType, currencyListStateType>(state => state.currencyListReducer)
     const [currencyId, setCurrencyId] = useState<string>("");
 
@@ -28,9 +32,15 @@ const SelectCurrency = (props: any) => {
 
     useEffect(() => {
         dispatch(makeCurrencyListTC(date))
+
+        if (!selectedCurrency){
+            dispatch(controlTradeBuyUiTC("prohibited"))
+        }
+
     }, [date]);
 
-    const selectDropChart = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectDropCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCurrency(true)
         setCurrencyId(e.currentTarget.value)
     }
 
@@ -47,13 +57,10 @@ const SelectCurrency = (props: any) => {
     }
 
     const enterAmount = (e: ChangeEvent<HTMLInputElement>) => {
-        setAmountTradedCurrency(+e.currentTarget.value)   // - need??????????????
-
-        //
+        setAmountTradedCurrency(+e.currentTarget.value)
         dispatch(holderTradeAmountTC(+e.currentTarget.value, currencyId))
-        //
-
     }
+
 
     const currencyListName = currencyList.list.map(elem =>
         <option key={elem.Cur_Abbreviation}
@@ -65,32 +72,38 @@ const SelectCurrency = (props: any) => {
 
 
     return (
-        <div className={style.selectCurency}>
+        <div className={style.selectCurency_container}>
 
-                <div>
-                    Select currency<br/>
-                    <select
-                        style={{width: 150}}
-                        onChange={selectDropChart}>
-                        <option> - no selected - </option>
-                        {currencyListName}
-                    </select>
-                </div>
+            <div>
+                    <span className={`${selectedCurrency
+                        ? style.hint_valid
+                        : style.hint_error} `}>
+                         Select currency
+                    </span>
+                <br/>
+                <select
+                    style={{width: 150}}
+                    onChange={selectDropCurrency}>
+                    <option> - no selected -</option>
+                    {currencyListName}
+                </select>
+            </div>
 
-                <div>
-                    Enter amount<br/>
-                    <input type="number"
-                           value={amountTradedCurrency}
-                           style={{width: 50}}
-                           onChange={(e) => enterAmount(e)}
-                    />
-                </div>
+            <div>
+                Enter amount<br/>
+                <input type="number"
+                       value={amountTradedCurrency}
+                       style={{width: 50}}
+                       onChange={(e) => enterAmount(e)}
+                       disabled={!selectedCurrency}
+                />
+            </div>
 
-                <div>
-                    press for<br/>
-                    <button onClick={buyCurrency} disabled={buttonBuyDisabled}>Buy</button>
-                    <button onClick={sellCurrency} disabled={buttonSellDisabled}>Sell</button>
-                </div>
+            <div>
+                press for<br/>
+                <button onClick={buyCurrency} disabled={buttonBuyDisabled}>Buy</button>
+                <button onClick={sellCurrency} disabled={buttonSellDisabled}>Sell</button>
+            </div>
 
         </div>
     )

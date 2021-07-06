@@ -1,23 +1,21 @@
 
 import style from "./CurrencyCard.module.css";
-import React, {ChangeEvent, ChangeEventHandler, EventHandler, useEffect, useState} from "react";
-
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import img from "../../../animation/img/process.png"
 
 
 const CurrencyCard = (props: any) => {
 
-
-
     return (
- 
+
          <div className={style.card_items}
               id={props.Cur_Abbreviation}>
-              <span>{props.Cur_Abbreviation}</span>
-              <br/>
               <span>{props.Cur_Name}</span>
               <br/>
-              <span>{props.Cur_OfficialRate}</span>
+              <span className={style.card_rate_items}>BYN/{props.Cur_Abbreviation}</span>
+              <span className={style.card_rate_items}>={props.Cur_OfficialRate}</span>
+              <br/>
+              <img src={img} style={{width: 15}} />
          </div>
 
     )

@@ -1,14 +1,15 @@
 
-
-.cards_container{
-}
-
 .card_items{
   margin: 5px;
-  width: 200px;
+  width: 150px;
   height: 80px;
-  border-radius: 10px;
-  background-color: lightgrey;
-  border: solid 3px blue;
+  border-radius: 5px;
+  background-color: lightskyblue;
+  border: solid 1px gray;
+}
+
+.card_rate_items{
+  font-size: 10px;
+  font-weight: bold;
 }
 

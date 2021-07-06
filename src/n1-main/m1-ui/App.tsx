@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
         <HashRouter>
-          <Navigation/>
-          <Routes/>
+              <Navigation/>
+              <Routes/>
         </HashRouter>
     </div>
   );

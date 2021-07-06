@@ -8,8 +8,6 @@ export const currencyChartReducer = (state = initState, action: AddCurrencyChart
     switch (action.type) {
         case "setCurrencyChart": {
 
-            console.log("currencyChart work")
-
             return state={value:action.rateData,currencyId:action.currencyId, dateFrom:action.dateFrom, dateTill:action.dateTill};
         }
 
