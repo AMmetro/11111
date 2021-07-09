@@ -1,8 +1,10 @@
 import {Dispatch} from "redux";
 import {myAPI} from "../m3-dal/Api";
 
-export type currencyChartStateType = {value:[] ,currencyId:any, dateFrom:any, dateTill:any};
-const initState:currencyChartStateType = {value:[],currencyId:"", dateFrom:"", dateTill:""};
+export type ValueType=[{Cur_ID: string, Date: string, Cur_OfficialRate: number }]
+export type currencyChartStateType = {value:ValueType ,currencyId:string, dateFrom:string, dateTill:string};
+const initState:currencyChartStateType = {value:[{Cur_ID: "", Date: "", Cur_OfficialRate: 0}],
+                                          currencyId:"", dateFrom:"", dateTill:""};
 
 export const currencyChartReducer = (state = initState, action: AddCurrencyChartType): currencyChartStateType => { // fix any
     switch (action.type) {

@@ -9,36 +9,33 @@ function Currency() {
 
     const [currencyListDate, setCurrencyListDate] = useState<string>("");
 
-    const currencyList=useSelector<AppStoreType,currencyListStateType>(state=>state.currencyListReducer)
+    const currencyList = useSelector<AppStoreType, currencyListStateType>(state => state.currencyListReducer)
     const dispatch = useDispatch()
 
     const today = new Date();
-    today.setDate(today.getDate() );
-    const date = today.toISOString().substr(0,10);
+    const date = today.toISOString().substr(0, 10);
+
+    const currPair = currencyList.list.map(elem =>
+        <div className={style.pairs_table} id={elem.Cur_Abbreviation}>
+            <span>{elem.Cur_Abbreviation}</span>
+            <span>{elem.Cur_Name}</span>
+            <span>{elem.Cur_OfficialRate}</span>
+        </div>)
 
 
-      const currPair = currencyList.list.map(elem =>
-          <div className={style.pairs_table} id={elem.Cur_Abbreviation}>
-              <span>{elem.Cur_Abbreviation}</span>
-              <span>{elem.Cur_Name}</span>
-              <span>{elem.Cur_OfficialRate}</span>
-          </div> )
-
-
-    const changeCurrencyListDateHandler = ()=>{
+    const changeCurrencyListDateHandler = () => {
         //@ts-ignore
-        let inputDate=document.getElementById("currencyListDate").value
+        let inputDate = document.getElementById("currencyListDate").value
         setCurrencyListDate(inputDate)
     }
 
-    const getCurrencyRate=()=>{
-//    --------------------------------------------------------
-
+    const getCurrencyRate = () => {
         dispatch(makeCurrencyListTC(currencyListDate))
     }
-     return (
-        <div className={style.body_container}>
 
+
+    return (
+        <div className={style.body_container}>
 
             <div className={style.input_container}>
                 <div className={style.input_lable}>
@@ -46,9 +43,9 @@ function Currency() {
                 </div>
                 <div>
                     <input id="currencyListDate" value={currencyListDate}
-                     type="date" name="currencyListDate"
-                     defaultValue={date}
-                     onChange={changeCurrencyListDateHandler}/>
+                           type="date" name="currencyListDate"
+                           defaultValue={date}
+                           onChange={changeCurrencyListDateHandler}/>
                     <SuperButtonContainer
                         red // пропсу с булевым значением не обязательно указывать true
                         onClick={getCurrencyRate}>
@@ -56,10 +53,9 @@ function Currency() {
                     </SuperButtonContainer>
                 </div>
 
-
             </div>
 
-            <span> {currencyList.date ? currencyList.date : today.getDate() +"-"+ (today.getMonth()+1) +"-"+ today.getFullYear()} </span>
+            <span> {currencyList.date ? currencyList.date : today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear()} </span>
 
             {currPair}
 

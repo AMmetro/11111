@@ -18,14 +18,15 @@ function Charts() {
     const currencyList=useSelector<AppStoreType,currencyListStateType>(state=>state.currencyListReducer)
     const dispatch = useDispatch()
 
+  
     const today = new Date();
-    today.setDate(today.getDate() );
+    // today.setDate(today.getDate() );
     const date = today.toISOString().substr(0,10);
 
     //----------------------------------------------------------------------------------
-    useEffect(() => {
-        dispatch(makeCurrencyListTC(date))
-    },[date]);
+    // useEffect(() => {
+    //     dispatch(makeCurrencyListTC(date))
+    // },[date]);
     //----------------------------------------------------------------------------------
 
 

@@ -9,7 +9,9 @@ import {addAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletRed
 import {removeAdditionalCurrencyTC} from "../../../../../m2-bll/currenciesWalletReducer";
 import {
     controlTradeBuyUiTC,
-    controlTradeUserinterfaceReducerStateType
+    controlTradeSellUiTC,
+    controlTradeBuyAnimationUiTC,
+    controlTradeUserinterfaceReducerStateType, controlTradeSellAnimationUiTC
 } from "../../../../../m2-bll/controlTradeUserInterfaceReducer";
 
 
@@ -35,28 +37,62 @@ const SelectCurrency = (props: any) => {
 
         if (!selectedCurrency){
             dispatch(controlTradeBuyUiTC("prohibited"))
+            dispatch(controlTradeSellUiTC("prohibited"))
         }
 
     }, [date]);
 
+    // -----check if some currency selected from list------------------------
     const selectDropCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCurrency(true)
-        setCurrencyId(e.currentTarget.value)
-    }
+        if (e.currentTarget.value.length < 4){  // lenth of not selected > 4
+            setSelectedCurrency(true)
+            setCurrencyId(e.currentTarget.value)
+        }
+        else {
+            dispatch(controlTradeBuyUiTC("prohibited"))
+            dispatch(controlTradeSellUiTC("prohibited"))
+            setSelectedCurrency(false)
+          }
+     }
+
 
     const buyCurrency = () => {
         dispatch(withdrawalMoneyTC(amountTradedCurrency, currencyId))
         dispatch(addAdditionalCurrencyTC(amountTradedCurrency, currencyId))
         setAmountTradedCurrency(0)
+        turnOnControlBuyAnimationCurrency()
     }
 
     const sellCurrency = () => {
         dispatch(enrolledMoneyTC(amountTradedCurrency, currencyId))
         dispatch(removeAdditionalCurrencyTC(amountTradedCurrency, currencyId))
         setAmountTradedCurrency(0)
+        turnOnControlSellAnimationCurrency()
     }
 
+
+   // ----------------------ANIMATION----------------------------------------------------
+
+
+    const turnOnControlBuyAnimationCurrency=()=>{
+        dispatch(controlTradeBuyAnimationUiTC("true"))
+        setTimeout(() => dispatch(controlTradeBuyAnimationUiTC("false")), 3100)
+    }
+
+    const turnOnControlSellAnimationCurrency=()=>{
+        dispatch(controlTradeSellAnimationUiTC("true"))
+        setTimeout(() => dispatch(controlTradeSellAnimationUiTC("false")), 3100)
+    }
+
+
+    // ------------------------------------------------------------------------
+
+
+
+
+
     const enterAmount = (e: ChangeEvent<HTMLInputElement>) => {
+
         setAmountTradedCurrency(+e.currentTarget.value)
         dispatch(holderTradeAmountTC(+e.currentTarget.value, currencyId))
     }

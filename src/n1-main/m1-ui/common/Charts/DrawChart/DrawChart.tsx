@@ -1,39 +1,49 @@
 import React, {useRef, useEffect} from 'react'
 import style from "../Charts.module.css";
+import {currencyListStateType} from "../../../../m2-bll/currencyListReducer";
+import {currencyChartStateType} from "../../../../m2-bll/currencyChartReducer";
+
+export type PropsType = {
+    // currencyChart:currencyChartStateType
+    currencyChart:currencyChartStateType
+    currencyList:currencyListStateType
+    currencyId:string
+}
+
+
 
 const WIDTH = 400;
 const HEIGHT = 200;
 const DPI_WIDTH = WIDTH * 2;
 const DPI_HEIGHT = HEIGHT * 2;
 
-const DrawCharts = (props: any) => {
+const DrawCharts = (props:PropsType) => {
 
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+        const canvasRef = useRef<HTMLCanvasElement | null>(null);
     // const contextRef = React.useRef<CanvasRenderingContext2D | null>(null);
 
     const drawChart = (ctx: any, data: any) => {
-        let i = 1
-             ctx!.lineWidth = 3
-             ctx!.strokeStyle = "yellow"
-        for (i; i < data.length; i++) {
-            ctx.beginPath();
-            ctx.moveTo(...{...data}[i - 1]);
-            ctx.lineTo(...{...data}[i]);
-            ctx.stroke();
-        }
-
-    //@ts-ignore
-    const currencyAbbreviation = props.currencyList.list.filter(elem => elem.Cur_ID === +props.currencyId )
+        // сюда очистка вставить?
+        let i = 1;
+        ctx!.lineWidth = 3;
+        ctx!.strokeStyle = "yellow";
+            for (i; i < data.length; i++) {
+                ctx.beginPath();
+                ctx.moveTo(...{...data}[i - 1]);
+                ctx.lineTo(...{...data}[i]);
+                ctx.stroke();
+            }
+     // - из логики вытащить?
+     const currencyAbbreviation = props.currencyList.list.filter(elem => elem.Cur_ID === +props.currencyId )
         if (currencyAbbreviation[0]){
         ctx.fillStyle = "#00F";
-        ctx.strokeStyle = "#F00";
+        ctx.strokeStyle = "red";
         ctx.font = "italic 20pt Arial";
         ctx.fillText(`${currencyAbbreviation[0].Cur_Abbreviation}`, 200, 30);
         }
     }
 
     const drawGrid = (context:any) => {
-
         const scaleX = 20;
         const scaleY = 50;
         context!.beginPath();
@@ -59,21 +69,18 @@ const DrawCharts = (props: any) => {
 
     useEffect(() => {
         if (canvasRef.current) {
-            const canvas = canvasRef.current
+            const canvas = canvasRef.current;
             const context = canvas.getContext('2d')
             canvas.style.width = WIDTH + "px"
-            canvas.style.background = "lightgray"
             canvas.style.height = HEIGHT + "px"
+            canvas.style.background = "lightgray"
 
-//---------------------------calc data for Chart----------------------------------------
-           if (props.currencyChart.value) {
-             //@ts-ignore
+        //-----make array data for chart ( time <-> rate)------
              const currencyChartValue = props.currencyChart.value.map(elem =>
-               [+elem.Date.slice(8, 10)*10, elem.Cur_OfficialRate*12]
-                )
-               drawChart(context, currencyChartValue)
-            }
-//------------------------------------------------------------------------------
+                         [+elem.Date.slice(8, 10) * 10, elem.Cur_OfficialRate * 12]
+                        )
+              drawChart(context, currencyChartValue)
+        //-----draw grid for charts----------------------------
             context!.strokeStyle = "white"
             context!.lineWidth = 0.1
             context!.globalAlpha = 0.5
@@ -86,7 +93,7 @@ const DrawCharts = (props: any) => {
             <span>chart for period {props.currencyChart.dateFrom} - {props.currencyChart.dateTill}</span>
             <br/>
             <canvas ref={canvasRef} {...props}
-                    {...props.currencyChartValue}
+                    {...props.currencyChart.value}
             />
         </div>
     )

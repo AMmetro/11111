@@ -28,7 +28,6 @@ const ExchangeHeader = (props: any) => {
                 <Wallet/>
             </div>
 
-
         </div>
     )
 }
