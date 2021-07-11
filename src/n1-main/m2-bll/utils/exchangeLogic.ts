@@ -1,7 +1,8 @@
+import {currencyReceivedData} from "../currencyListReducer";
 
 export const changeCurrency={
 
-     getAbreviature (amount:number,currencyId:string, currencyList: Array<any>) {
+    getCurrencyAbreviature (currencyId:string, currencyList: Array<currencyReceivedData>) {
          const abreviatureArray=currencyList.filter(el =>el.Cur_ID=== +currencyId)
          return abreviatureArray[0].Cur_Abbreviation
     },
