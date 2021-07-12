@@ -1,5 +1,8 @@
-.App {
-  text-align: center;
+
+.Start {
+    text-align: center;
+    border: 1px solid wheat;
+    width: 95%;
+    margin: 0 auto;
+
 }
-
-

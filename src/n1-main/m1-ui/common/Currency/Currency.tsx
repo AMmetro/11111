@@ -1,9 +1,11 @@
 import React, {ChangeEvent, useState} from "react";
 import style from "./Currency.module.css";
 import SuperButtonContainer from "../SuperComponents/SuperButton/SuperButtonContainer";
-import {makeCurrencyListTC, currencyListStateType} from "../../../m2-bll/currencyListReducer";
+import {makeCurrencyListTodayTC, currencyListStateType} from "../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
+import AnimationLoading from "../animation/AnimationLoading";
+
 
 function Currency() {
 
@@ -15,7 +17,7 @@ function Currency() {
     const today = new Date();
     const date = today.toISOString().substr(0, 10);
 
-    const currPair = currencyList.list.map(elem =>
+    const currPair = currencyList[0].list.map(elem =>
         <div className={style.pairs_table} id={elem.Cur_Abbreviation}>
             <span>{elem.Cur_Abbreviation}</span>
             <span>{elem.Cur_Name}</span>
@@ -30,7 +32,7 @@ function Currency() {
     }
 
     const getCurrencyRate = () => {
-        dispatch(makeCurrencyListTC(currencyListDate))
+        dispatch(makeCurrencyListTodayTC(currencyListDate))
     }
 
 
@@ -55,7 +57,9 @@ function Currency() {
 
             </div>
 
-            <span> {currencyList.date ? currencyList.date : today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear()} </span>
+            <span> {currencyList[0].date ? currencyList[0].date : today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear()} </span>
+
+            <AnimationLoading/>
 
             {currPair}
 

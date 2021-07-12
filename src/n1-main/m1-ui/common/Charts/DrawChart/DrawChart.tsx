@@ -43,7 +43,7 @@ const DrawCharts = (props: PropsType) => {
             ctx.stroke();
         }
 
-        const currencyAbbreviation = props.currencyList.list.filter(elem => elem.Cur_ID === +props.currencyId)
+        const currencyAbbreviation = props.currencyList[0].list.filter(elem => elem.Cur_ID === +props.currencyId)
 
         if (currencyAbbreviation[0]) {
             ctx.fillStyle = "#00F";

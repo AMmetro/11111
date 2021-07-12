@@ -1,9 +1,12 @@
 .navigation_container{
+
+}
+
+.navigation_menu{
   display: flex;
   width: 90%;
   margin: 0 auto;
-  /*border: 1px solid;*/
-  justify-content: space-evenly;
+ justify-content: space-evenly;
 }
 
 .navigationLink_holder{

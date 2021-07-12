@@ -1,6 +1,6 @@
 import style from "./ExchangeHeader.module.css";
 import React, {ChangeEvent, ChangeEventHandler, EventHandler, useEffect, useState} from "react";
-import {makeCurrencyListTC, currencyListStateType} from "../../../../m2-bll/currencyListReducer";
+import {makeCurrencyListTodayTC, currencyListStateType} from "../../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import Wallet from "./Wallet/Wallet";
 import CurrenciesWallet from "./CurrenciesWallet/CurrenciesWallet";
@@ -15,7 +15,7 @@ const ExchangeHeader = (props: any) => {
     const date = today.toISOString().substr(0, 10);
 
     useEffect(() => {
-        dispatch(makeCurrencyListTC(date))
+        dispatch(makeCurrencyListTodayTC(date))
     }, [date]);
 
     return (

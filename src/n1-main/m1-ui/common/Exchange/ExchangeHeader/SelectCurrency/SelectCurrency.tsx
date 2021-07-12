@@ -1,6 +1,6 @@
 import style from "./SelectCurency.module.css";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {makeCurrencyListTC, currencyListStateType} from "../../../../../m2-bll/currencyListReducer";
+import {makeCurrencyListTodayTC, currencyListStateType} from "../../../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../../m2-bll/store";
 import {withdrawalMoneyTC, enrolledMoneyTC} from "../../../../../m2-bll/walletReducer";
@@ -33,7 +33,7 @@ const SelectCurrency = (props: any) => {
     const date = today.toISOString().substr(0, 10);
 
     useEffect(() => {
-        dispatch(makeCurrencyListTC(date))
+        dispatch(makeCurrencyListTodayTC(date))
 
         if (!selectedCurrency){
             dispatch(controlTradeBuyUiTC("prohibited"))
@@ -84,12 +84,7 @@ const SelectCurrency = (props: any) => {
         setTimeout(() => dispatch(controlTradeSellAnimationUiTC("false")), 3100)
     }
 
-
     // ------------------------------------------------------------------------
-
-
-
-
 
     const enterAmount = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -98,7 +93,7 @@ const SelectCurrency = (props: any) => {
     }
 
 
-    const currencyListName = currencyList.list.map(elem =>
+    const currencyListName = currencyList[0].list.map(elem =>
         <option key={elem.Cur_Abbreviation}
                 value={elem.Cur_ID}
         >

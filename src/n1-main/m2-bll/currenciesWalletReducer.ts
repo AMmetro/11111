@@ -45,7 +45,7 @@ export const removeAdditionalCurrencyAC = (amount: number, currencyAbreviature: 
 // thunks-------------------------------------------------------------------
 export const addAdditionalCurrencyTC = (amount: number, currencyId: string) => {
     return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
-        let currencyList = getState().currencyListReducer.list
+        let currencyList = getState().currencyListReducer[0].list
         let currencyAbreviature = changeCurrency.getCurrencyAbreviature( currencyId, currencyList)
         dispatch(addAdditionalCurrencyAC(amount, currencyAbreviature))
     }
@@ -53,7 +53,7 @@ export const addAdditionalCurrencyTC = (amount: number, currencyId: string) => {
 
 export const removeAdditionalCurrencyTC = (amount: number, currencyId: string) => {
     return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
-        let currencyList = getState().currencyListReducer.list
+        let currencyList = getState().currencyListReducer[0].list
         let currencyAbreviature = changeCurrency.getCurrencyAbreviature( currencyId, currencyList)
         dispatch(removeAdditionalCurrencyAC(amount, currencyAbreviature))
     }

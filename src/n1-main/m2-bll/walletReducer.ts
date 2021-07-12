@@ -29,14 +29,14 @@ export const enrolledMoneyAC = (currencyPrice:number): ChangeWalletBalanceType =
 
 // thunks-------------------------------------------------------------------
     export const withdrawalMoneyTC = (amount:number,currencyId:string) => {return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
-        let currencyList = getState().currencyListReducer.list
+        let currencyList = getState().currencyListReducer[0].list
         let currencyPrice = changeCurrency.getTradetCurrencyPrice(amount, currencyId, currencyList)
         dispatch(withdrawalMoneyAC(currencyPrice))
     }}
 
 
     export const enrolledMoneyTC = (amount:number,currencyId:string) => {return (dispatch: Dispatch<any>, getState: () => AppStoreType) => {
-        let currencyList = getState().currencyListReducer.list
+        let currencyList = getState().currencyListReducer[0].list
         let currencyPrice = changeCurrency.getTradetCurrencyPrice(amount, currencyId, currencyList)
         dispatch(enrolledMoneyAC(currencyPrice))
     }}

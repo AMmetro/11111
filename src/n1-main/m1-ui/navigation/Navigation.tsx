@@ -1,19 +1,23 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import style from "./Navigation.module.css";
+import AnimationHeader from "../common/animation/AnimationHeader";
+import Logo from "../common/animation/img/logo.svg";
 
 
 function Navigation() {
 
   return (
     <div className={style.navigation_container}>
+ 
+    <AnimationHeader/>
+    
+    <div className={style.navigation_menu} >    
 
-
-
-        {/*-----------------logo------------------------------------------*/}
+       {/*-----------------logo------------------------------------------*/}
 
         <div className={style.logo_container}>
-
+ 
             <svg width="70" height="50" viewBox="0 0 33 19">
                 <path fill="#2962FF"
                       d="M29.032 7.382a5.47 5.47 0 0 1 .963 2.872A4.502 4.502 0 0 1 28.5 19H6a5.98 5.98 0 0 1-4.222-1.737l9.546-7.556c.35.187.75.293 1.176.293a2.49 2.49 0 0 0 1.066-.238l4.55 3.981a2.5 2.5 0 1 0 4.711-.157l6.205-6.204zm-1.414-1.414l-6.204 6.204A2.494 2.494 0 0 0 20.5 12a2.49 2.49 0 0 0-1.066.238l-4.55-3.981a2.5 2.5 0 1 0-4.801-.118L.608 15.638A6 6 0 0 1 6.061 7a8.001 8.001 0 0 1 15.625-1.227A5.474 5.474 0 0 1 24.5 5c1.157 0 2.231.358 3.118.968z">
@@ -51,11 +55,11 @@ function Navigation() {
            </div>
         </div>
 
-           <div><br/>
+           <div>
 
         </div>
 
-
+    </div>
     </div>
   );
 }

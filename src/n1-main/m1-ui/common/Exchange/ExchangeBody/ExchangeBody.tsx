@@ -1,10 +1,10 @@
 import style from "./ExchangeBody.module.css";
 import React, {ChangeEvent, ChangeEventHandler, EventHandler, useEffect, useState} from "react";
-import {makeCurrencyListTC, currencyListStateType} from "../../../../m2-bll/currencyListReducer";
+import {makeCurrencyListTodayTC, currencyListStateType} from "../../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
 import CurrencyCard from "./CurencyCard/CurrencyCard";
-import weitingCoin from "../../animation/img/coin3.svg"
+import AnimationLoading from "../../animation/AnimationLoading";
 
 
 
@@ -12,7 +12,10 @@ const ExchangeBody = (props: any) => {
 
     const currencyList=useSelector<AppStoreType,currencyListStateType>(state=>state.currencyListReducer)
 
-
+    const trend = currencyList[0].list.map((elem,i)=>{
+        return (
+        elem.Cur_OfficialRate - currencyList[1].list[i].Cur_OfficialRate
+            ) })
 
     const flag=["https://restcountries.eu/data/aus.svg",
                 "https://restcountries.eu/data/bgr.svg",
@@ -48,22 +51,11 @@ const ExchangeBody = (props: any) => {
     <div className={style.exchange_body_container} >
 
 
-     { !currencyList.list.length &&
-
-           <div>
-                <h1>... Loading data</h1>
-                <object className={style.weitingCoin} type="image/svg+xml" data={weitingCoin}>
-                   Your browser does not support SVG
-               </object>
-           </div>
-
-    }
-
-
+        <AnimationLoading/>
 
          <div className={style.exchange_card_container}>
 
-              { currencyList.list.map((elem,i) =>{
+              { currencyList[0].list.map((elem,i) =>{
                   // excluding one exact item from the list
                   if (elem.Cur_Abbreviation!= "XDR"){
                           return(
@@ -73,6 +65,8 @@ const ExchangeBody = (props: any) => {
                                   Cur_Name={elem.Cur_Name}
                                   Cur_OfficialRate={elem.Cur_OfficialRate}
                                   flag={flag[i]}
+                                  trend={trend[i]}
+
                               />
                               )
                       }}

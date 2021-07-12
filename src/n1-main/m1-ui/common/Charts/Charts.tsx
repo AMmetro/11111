@@ -1,11 +1,12 @@
 import React, {ChangeEvent, ChangeEventHandler, EventHandler, useEffect, useState} from "react";
 import style from "./Charts.module.css";
 import SuperButtonContainer from "../SuperComponents/SuperButton/SuperButtonContainer";
-import {makeCurrencyListTC, currencyListStateType} from "../../../m2-bll/currencyListReducer";
+import {makeCurrencyListTodayTC, currencyListStateType} from "../../../m2-bll/currencyListReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import DrawCharts from "./DrawChart/DrawChart";
 import {makeChartsTC,currencyChartStateType} from "../../../m2-bll/currencyChartReducer";
+import AnimationLoading from "../animation/AnimationLoading";
 
 
 function Charts() {
@@ -18,7 +19,7 @@ function Charts() {
     const currencyList=useSelector<AppStoreType,currencyListStateType>(state=>state.currencyListReducer)
     const dispatch = useDispatch()
 
-  
+
     const today = new Date();
     // today.setDate(today.getDate() );
     const date = today.toISOString().substr(0,10);
@@ -30,7 +31,7 @@ function Charts() {
     //----------------------------------------------------------------------------------
 
 
-    const currencyListName = currencyList.list.map(elem =>
+    const currencyListName = currencyList[0].list.map(elem =>
                                     <option key={elem.Cur_Abbreviation}
                                             value={elem.Cur_ID}
                                       >
@@ -90,7 +91,9 @@ function Charts() {
               </select>
             <br/>
 
-             <DrawCharts
+            <AnimationLoading/>
+
+            <DrawCharts
                  currencyChart={currencyChart}
                  currencyList={currencyList}
                  currencyId={currencyId}

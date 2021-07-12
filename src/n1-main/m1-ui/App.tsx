@@ -3,7 +3,7 @@ import Navigation from './navigation/Navigation';
 import {HashRouter} from "react-router-dom";
 import Routes from "./routes/Routes";
 import './App.css';
-import {makeCurrencyListTC} from "../m2-bll/currencyListReducer";
+import {makeCurrencyListYesterdayTC, makeCurrencyListTodayTC} from "../m2-bll/currencyListReducer";
 import {useDispatch} from "react-redux";
 
 
@@ -12,13 +12,18 @@ function App() {
 
     const dispatch = useDispatch()
 
-
     const today = new Date();
-    const date = today.toISOString().substr(0,10);
+    const todayDate = today.toISOString().substr(0,10);
+    const todaySec = today.getTime();
+    const yesterdaySec = todaySec - 86400000*3;
+    const yesterday = new Date(yesterdaySec)
+    const yesterdayDate = yesterday.toISOString().substr(0,10);
+
 
     useEffect(() => {
-        dispatch(makeCurrencyListTC(date))
-    },[date]);
+        dispatch(makeCurrencyListTodayTC(todayDate))
+        dispatch(makeCurrencyListYesterdayTC(yesterdayDate))
+     }, []);
 
 
 

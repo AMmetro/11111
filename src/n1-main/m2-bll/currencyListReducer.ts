@@ -6,37 +6,56 @@ export type currencyReceivedData = {
     Cur_Scale: number, Date: string
 }
 
-
-export type currencyListStateType = { list: Array<currencyReceivedData>, date: string };
-const initState: currencyListStateType = {list: [], date: ""};
+export type currencyListStateType = [{ list: Array<currencyReceivedData>, date: string },{ list: Array<currencyReceivedData>, date: string }];
+const initState: currencyListStateType = [{list: [], date: ""},{list: [], date: ""}];
 
 export const currencyListReducer = (state = initState, action: AddCurrencyListType): currencyListStateType => { // fix any
 
-    switch (action.type) {
-        case "setCurrencyList": {
+    switch (action.type)
 
-            return state = {list: [...action.currencyList], date: action.currencyListDate};
+    {
+
+        case "setCurrencyListToday": {
+            state[0]={list: [...action.currencyList], date: action.currencyListDate};
+          return [...state]
+        }
+
+        case "setCurrencyListYestoday": {
+            state[1]={list: [...action.currencyList], date: action.currencyListDate};
+            return state
         }
 
         default:
-            return state;
+            return [...state];
     }
+
 };
 
 // actions-------------------------------------------------------------------
-type AddCurrencyListType = { type: "setCurrencyList", currencyList: any, currencyListDate: string };
-export const addCurrencyListAC = (currencyList: any, currencyListDate: string): any => {
-    return {type: "setCurrencyList", currencyList, currencyListDate}
+type AddCurrencyListType = { type: "setCurrencyListToday"|"setCurrencyListYestoday", currencyList: any, currencyListDate: string };
+export const addCurrencyListTodayAC = (currencyList: any, currencyListDate: string): any => {
+    return {type: "setCurrencyListToday", currencyList, currencyListDate}
+};
+export const addCurrencyListYestodayAC = (currencyList: any, currencyListDate: string): any => {
+    return {type: "setCurrencyListYestoday", currencyList, currencyListDate}
 };
 
 
 // thunks-------------------------------------------------------------------
-export const makeCurrencyListTC = (currencyListDate: any) => {
+export const makeCurrencyListTodayTC = (currencyListDate: any) => {
     return (dispatch: Dispatch<any>) => {
         myAPI.getCurensysList(currencyListDate)
             .then((res) => {
-                dispatch(addCurrencyListAC([...res.data], currencyListDate))
+                dispatch(addCurrencyListTodayAC([...res.data], currencyListDate))
             })
+    }
+}
 
+export const makeCurrencyListYesterdayTC = (currencyListDate: any) => {
+    return (dispatch: Dispatch<any>) => {
+        myAPI.getCurensysList(currencyListDate)
+            .then((res) => {
+                dispatch(addCurrencyListYestodayAC([...res.data], currencyListDate))
+            })
     }
 }

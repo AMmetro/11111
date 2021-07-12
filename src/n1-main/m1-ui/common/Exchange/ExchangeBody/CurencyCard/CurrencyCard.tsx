@@ -16,6 +16,7 @@ const CurrencyCard = (props: any) => {
               <span className={style.card_rate_items}>={props.Cur_OfficialRate}</span>
               <br/>
               <img src={props.flag} style={{width: 33}} />
+              {props.trend ? "<-" : "->"}
          </div>
 
     )
