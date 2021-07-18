@@ -1,3 +1,6 @@
+
+DEPLOY: https://ammetro.github.io/Currency-exchange/
+
 # Getting Started with Create React App
 
 ## Available Scripts
