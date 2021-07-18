@@ -26,7 +26,7 @@ export const currencyChartReducer = (state = initState, action: AddCurrencyChart
 // actions-------------------------------------------------------------------
 
 type AddCurrencyChartType = { type: string, rateData: ValueType, currencyId: string, dateFrom: string, dateTill: string };
-export const addCurrencyChartAC = (rateData: any, currencyId: string, dateFrom: string, dateTill: string): AddCurrencyChartType => {
+export const addCurrencyChartAC = (rateData: ValueType, currencyId: string, dateFrom: string, dateTill: string): AddCurrencyChartType => {
     return { type: "setCurrencyChart", rateData, currencyId, dateFrom, dateTill }
 };
 
@@ -36,7 +36,7 @@ export const makeChartsTC = (currencyId: string, dateFrom: string, dateTill: str
     return (dispatch: Dispatch<AddCurrencyChartType>) => {
         myAPI.getChartData(currencyId, dateFrom, dateTill)
             .then((res) => {
-                dispatch(addCurrencyChartAC([...res.data], currencyId, dateFrom, dateTill))
+              dispatch(addCurrencyChartAC(res.data, currencyId, dateFrom, dateTill))
             })
 
     }

@@ -42,7 +42,7 @@ const SelectCurrency = () => {
 
     }, [date]);
 
-    // -----check if some currency selected from list------------------------
+// -------------control if some currency selected from list------------------------
     const selectDropCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
         if (e.currentTarget.value.length < 4) {  // if lenth > 3 currency is not selected
             setSelectedCurrency(true);
@@ -70,7 +70,7 @@ const SelectCurrency = () => {
     }
 
 
-    // ----------------------ANIMATION----------------------------------------------------
+// ----------------------ANIMATION----------------------------------------------------
 
 
     const turnOnControlBuyAnimationCurrency = () => {
@@ -83,7 +83,7 @@ const SelectCurrency = () => {
         setTimeout(() => dispatch(controlTradeSellAnimationUiTC("false")), 3100);
     }
 
-    // ------------------------------------------------------------------------
+ // ------------------------------------------------------------------------
 
     const enterAmount = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -120,6 +120,7 @@ const SelectCurrency = () => {
                 <div>
                     <span>Amount</span> <br/>
                     <input type="number"
+                           min="1"
                            value={amountTradedCurrency}
                            className={style.select_amount}
                            onChange={(e) => enterAmount(e)}

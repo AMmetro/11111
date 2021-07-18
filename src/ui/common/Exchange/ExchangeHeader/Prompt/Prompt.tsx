@@ -1,11 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
+import style from "./Prompt.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../../bll/store";
 import {walletReducerStateType} from "../../../../../bll/walletReducer";
 import {holderTradeValueReducerStateType} from "../../../../../bll/holderTradeValueReducer";
-import { controlTradeBuyUiTC, controlTradeSellUiTC,
-       } from "../../../../../bll/controlTradeUserInterfaceReducer";
+import {
+    controlTradeBuyUiTC, controlTradeSellUiTC,
+} from "../../../../../bll/controlTradeUserInterfaceReducer";
 import {currenciesWalletReducerStateType} from "../../../../../bll/currenciesWalletReducer";
+
 
 
 const Prompt = () => {
@@ -17,6 +20,7 @@ const Prompt = () => {
     const dispatch = useDispatch()
 
      let tradeSellProhibited:boolean = currenciesWalletValue[tradeCurrencyValue.currencyAbbreviation] < tradeCurrencyValue.amount;
+
      if (currenciesWalletValue[tradeCurrencyValue.currencyAbbreviation]===undefined) {
          tradeSellProhibited =  true}
 
@@ -42,7 +46,9 @@ const Prompt = () => {
 
 
     return (
-        <div>
+        <div className={style.prompt_wrapper}>
+
+            {tradeBuyProhibited ? <div className={style.hint}>Not enough money for Buy</div>: null }
 
         </div>
 
