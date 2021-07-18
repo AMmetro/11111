@@ -1,0 +1,39 @@
+
+.body_container{
+  background-color: #e6eaeb;
+  position: relative;
+  margin:0 auto;
+  margin-top: 10px;
+}
+
+.input_container{
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #e6eaeb;
+  width: 500px;
+  justify-content: center;
+  margin:0 auto;
+}
+
+.pairs_table{
+  border: 1px solid black;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+
+}
+
+.input_label{
+  text-align:  center;
+}
+
+.inputDate{
+  width: 120px;
+  height: 12px;
+  font-size: 12px;
+  padding: 6px 0 4px 10px;
+  border: 1px solid #cecece;
+  background: #F6F6f6;
+  border-radius: 6px;
+}

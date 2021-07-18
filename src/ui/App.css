@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  border: 1px solid wheat;
+  border-radius: 5px;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+
+.superButton {
+  height: 22px;
+  line-height: 1.5em;
+  text-align: center;
+  text-shadow: 0 -1px 1px #777;
+  color: #fff;
+  border: 2px solid #e6eaeb;
+  border-radius: 3px;
+  box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;
+  background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
+}
+
+.superButton:active {
+  top: .1em;
+  left: .1em;
+  box-shadow: 0 0 0 60px rgba(0,0,0,.05) inset;
+}
+

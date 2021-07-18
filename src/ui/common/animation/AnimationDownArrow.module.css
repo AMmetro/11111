@@ -1,0 +1,30 @@
+
+.downArrow{
+    width: 10px;
+
+    animation-name: arrow_move;
+    animation-duration: 3s;
+    animation-delay: 0.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+
+
+  @keyframes arrow_move {
+    0% {
+      opacity: 0.5;
+      top: 30px;
+    }
+
+     40% {
+      opacity: 0.3;
+      top: 15px;
+    }
+
+    100% {
+      opacity: 0.2;
+      top: 0px;
+
+    }
+  }

@@ -1,0 +1,28 @@
+
+.card_items{
+  margin: 5px;
+  width: 130px;
+  height: 80px;
+  border-radius: 5px;
+  background-color: #e6eaeb;
+  border: solid 1px gray;
+  line-height: 1.1em;
+}
+
+.card_rate_items{
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.flag_trend_container{
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  justify-content: space-evenly;
+}
+
+.trend_arrow{
+  display: flex;
+  color: gray;
+}
+

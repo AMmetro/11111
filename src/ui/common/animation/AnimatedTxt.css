@@ -1,0 +1,40 @@
+.box {
+	 color: rgba(231, 38, 38, 0.25);
+     text-align: center;
+   	position: relative;
+	 }
+
+.paragraf {
+	text-transform: uppercase;
+	letter-spacing: .5em;
+	display: inline-block;
+	border: 4px double rgba(255,255,255,.25);
+	position: relative;
+	width: 17em;
+	margin: 0 0 0 -5em;
+}
+
+  .span {
+  	 font: 100 1em/1 "Oswald", sans-serif;
+   	letter-spacing: 0;
+  	text-shadow: 0 0 80px rgba(255,255,255,.5);
+     background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+     background-clip: text;
+	 animation-duration: 30s;
+	  animation-name: aitf;
+	  animation-iteration-count: infinite;
+	  animation-timing-function: linear;
+	  transform: translate3d(0,0,0);
+	  backface-visibility: hidden;
+  }
+
+
+
+ @keyframes aitf {
+	  from {
+		   background-position: -5% 200%;
+		 }
+     to {
+		  background-position: 50% 50%;
+		}
+    }
